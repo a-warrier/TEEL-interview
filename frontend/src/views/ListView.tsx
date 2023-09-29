@@ -3,7 +3,6 @@ import Person from "../models/Person";
 import { AxiosResponse } from "axios";
 import axios from 'axios';
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 function ListView(){
 
@@ -37,7 +36,6 @@ function ListView(){
             }
         </div>
         }
-        <Link to={"/add"}>Add Person</Link>
     </>
 }
 
