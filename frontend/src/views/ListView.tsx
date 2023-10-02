@@ -57,9 +57,7 @@ function ListView() {
     }
   };
 
-// ... (previous code)
-
-return (
+  return (
     <>
       <h1>List of all People</h1>
       <div>
