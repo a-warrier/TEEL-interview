@@ -52,7 +52,7 @@ function ListView() {
                   Delete
                 </DeleteButton>
                 <UpdateButton>
-                <Link to={"/update"}>Update</Link>
+                <Link to={`/update/${person.id}`}>Update</Link>
                 </UpdateButton>
               </PersonRow>
             );

@@ -27,8 +27,8 @@ public class PersonService {
             return;
     }
 
-    public Person update(Person toUpdate) {
-        return personRepository.findById(toUpdate.getId())
+    public Person update(Person toUpdate, Long id) {
+        return personRepository.findById(id)
         .map(person -> {
             person.setFirstName(toUpdate.getFirstName());
             person.setLastName(toUpdate.getLastName());

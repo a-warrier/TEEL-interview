@@ -9,7 +9,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={ListView} />
               <Route path="/add" component={AddView}/>
-              <Route exact path="/update" component={UpdateView} />
+              <Route exact path="/update/:id" component={UpdateView} />
             </Switch>
         </BrowserRouter>;
 }

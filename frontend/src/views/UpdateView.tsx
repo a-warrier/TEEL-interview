@@ -1,8 +1,10 @@
 import React, { useState, ChangeEvent } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 function UpdateView() {
+  const { id } = useParams<{ id: string }>(); // Extract 'id' as a string from route parameters
+
   const history = useHistory();
 
   const [firstName, setFirstName] = useState("");
@@ -17,20 +19,20 @@ function UpdateView() {
   };
 
   const handleUpdatePerson = async () => {
+    const idAsLong = parseInt(id, 10); // Assuming base 10
+
+    // Create a person object with the id, firstName, and lastName
     const updatedPerson = {
-      id: 0,
-      firstName: firstName,
-      lastName: lastName,
+        id: idAsLong,
+        firstName: firstName,
+        lastName: lastName,
     };
+
+    console.log("Person to update", updatedPerson);
 
     try {
       // Send a PUT request to update the person's details
-      const response = await axios.put('http://localhost:8080/person/update/', null, {
-        params: {
-            firstName: updatedPerson.firstName,
-            lastName: updatedPerson.lastName
-        }
-    });
+      const response = await axios.put(`http://localhost:8080/update/${id}`, updatedPerson);
 
       // Handle success
       console.log('Person updated successfully', response.data);
