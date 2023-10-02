@@ -18,4 +18,34 @@ public class Person {
     String firstName;
 
     String lastName;
+
+    // Getter method for id
+    public Long getId() {
+        return id;
+    }
+
+    // Setter method for id
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    // Getter method for firstName
+    public String getFirstName() {
+        return firstName;
+    }
+
+    // Setter method for firstName
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    // Getter method for lastName
+    public String getLastName() {
+        return lastName;
+    }
+
+    // Setter method for lastName
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }

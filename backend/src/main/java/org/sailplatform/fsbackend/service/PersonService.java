@@ -22,12 +22,19 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public Person delete(Person toDelete) {
-        try {
-            Person deletedPerson = personRepository.save(toDelete);
-            return deletedPerson;
-        } catch (Exception e) {
-            throw new RuntimeException("Error deleting person: " + e.getMessage());
-        }
+    public void delete(Person toDelete) {
+            personRepository.save(toDelete);
+            return;
+    }
+
+    public Person update(Person toUpdate) {
+        return personRepository.findById(toUpdate.getId())
+        .map(person -> {
+            person.setFirstName(toUpdate.getFirstName());
+            person.setLastName(toUpdate.getLastName());
+            return personRepository.save(person);
+        }).orElseGet(() -> {
+            return personRepository.save(toUpdate);
+        });
     }
 }

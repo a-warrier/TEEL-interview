@@ -51,6 +51,9 @@ function ListView() {
                 <DeleteButton onClick={() => handleDeletePerson(person)}>
                   Delete
                 </DeleteButton>
+                <UpdateButton>
+                <Link to={"/update"}>Update</Link>
+                </UpdateButton>
               </PersonRow>
             );
           })}
@@ -76,6 +79,13 @@ const PersonCell = styled.span`
 
 const DeleteButton = styled.button`
   background-color: #ff0000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+`;
+
+const UpdateButton = styled.button`
+  background-color: #00ff00;
   color: #fff;
   border: none;
   cursor: pointer;

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,13 +29,13 @@ public class PersonController {
 	}
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> delete(Person toDelete) {
-        try {
-            Person deletedPerson = personService.delete(toDelete);
-            return ResponseEntity.ok("Person deleted successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Error deleting person: " + e.getMessage());
-        }
+    public void delete(Person toDelete) {
+        personService.delete(toDelete);
+		return;
+    }
+
+	 @PutMapping("/update")
+    public Person update(Person toUpdate) {
+        return personService.update(toUpdate);
     }
 }
