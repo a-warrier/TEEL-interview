@@ -23,7 +23,7 @@ public class PersonService {
     }
 
     public void delete(Person toDelete) {
-            personRepository.save(toDelete);
+            personRepository.delete(toDelete);
             return;
     }
 
