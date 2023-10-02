@@ -21,4 +21,13 @@ public class PersonService {
     public List<Person> getAll(){
         return personRepository.findAll();
     }
+
+    public Person delete(Person toDelete) {
+        try {
+            Person deletedPerson = personRepository.save(toDelete);
+            return deletedPerson;
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting person: " + e.getMessage());
+        }
+    }
 }

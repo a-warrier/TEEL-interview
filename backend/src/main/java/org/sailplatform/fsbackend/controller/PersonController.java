@@ -25,4 +25,15 @@ public class PersonController {
 	public Person add(Person toAdd) {
 		return personService.add(toAdd);
 	}
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> delete(Person toDelete) {
+        try {
+            Person deletedPerson = personService.delete(toDelete);
+            return ResponseEntity.ok("Person deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error deleting person: " + e.getMessage());
+        }
+    }
 }
