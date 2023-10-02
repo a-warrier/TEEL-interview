@@ -22,6 +22,10 @@ public class PersonService {
         return personRepository.findAll();
     }
 
+    public List<Person> search(String firstName) {
+        return personRepository.findByFirstName(firstName);
+    }
+
     public void delete(Person toDelete) {
             personRepository.delete(toDelete);
             return;

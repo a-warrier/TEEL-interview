@@ -7,6 +7,7 @@ import org.sailplatform.fsbackend.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,6 +25,11 @@ public class PersonController {
 	public List<Person> getAll() {
 		return personService.getAll();
 	}
+
+	@GetMapping("/search")
+    public List<Person> search(@RequestParam String firstName) {
+        return personService.search(firstName);
+    }
 
     @PostMapping("/add")
 	public Person add(Person toAdd) {
