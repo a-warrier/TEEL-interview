@@ -30,12 +30,12 @@ public class PersonController {
 
     @DeleteMapping("/delete")
     public void delete(Person toDelete) {
-        personService.delete(toDelete);
+		personService.delete(toDelete);
 		return;
     }
 
-	 @PutMapping("/update")
-    public Person update(Person toUpdate) {
-        return personService.update(toUpdate);
+	@PutMapping("/update")
+	public Person update(Person toUpdate) {
+		return personService.update(toUpdate);
     }
 }
