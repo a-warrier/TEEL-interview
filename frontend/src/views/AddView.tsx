@@ -1,11 +1,10 @@
-import React, { useState, ChangeEvent } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import React, { useState, ChangeEvent } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function AddView() {
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
-
   const history = useHistory();
 
   const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +16,6 @@ function AddView() {
   };
 
   const handleAddPerson = async () => {
-    // Create a person object with the id, firstName, and lastName
     const newPerson = {
       id: 0,
       firstName: firstName,
@@ -25,37 +23,66 @@ function AddView() {
     };
 
     try {
-        const response = await axios.post('http://localhost:8080/add', null, {
-            params: {
-                firstName: newPerson.firstName,
-                lastName: newPerson.lastName
-            }
-        });
-        // Handle success
-        console.log('Person added successfully', response.data);
+      const response = await axios.post('http://localhost:8080/add', null, {
+        params: {
+          firstName: newPerson.firstName,
+          lastName: newPerson.lastName
+        }
+      });
 
-        // Redirect back to the list view after adding
-        history.push('/');
+      // Handle success
+      console.log('Person added successfully', response.data);
 
-      } catch (error) {
-        // Handle errors, e.g., show an error message
-        console.error('Error adding person:', error);
-      }
-
+      // Redirect back to the list view after adding
+      history.push('/');
+    } catch (error) {
+      // Handle errors, e.g., show an error message
+      console.error('Error adding person:', error);
+    }
   };
 
   return (
-    <div>
-      <h2>Add Person</h2>
-      <div>
-        <label htmlFor="firstname">First Name:</label>
-        <input type="text" id="firstname" value={firstName} onChange={handleFirstNameChange} />
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
+          <h1 className="text-center m-4">Add New Person</h1>
+          <form>
+            <div className="mb-3">
+              <label htmlFor="firstName" className="form-label">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                className="form-control"
+                placeholder="Enter first name"
+                value={firstName}
+                onChange={handleFirstNameChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="lastName" className="form-label">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                className="form-control"
+                placeholder="Enter last name"
+                value={lastName}
+                onChange={handleLastNameChange}
+              />
+            </div>
+            <button
+              type="button" // Prevents form submission
+              className="btn btn-outline-primary"
+              onClick={handleAddPerson}
+            >
+              Add
+            </button>
+          </form>
+        </div>
       </div>
-      <div>
-        <label htmlFor="lastname">Last Name:</label>
-        <input type="text" id="lastname" value={lastName} onChange={handleLastNameChange} />
-      </div>
-      <button onClick={handleAddPerson}>Add Person</button>
     </div>
   );
 }

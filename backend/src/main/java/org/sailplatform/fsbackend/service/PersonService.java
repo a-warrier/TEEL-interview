@@ -1,6 +1,8 @@
 package org.sailplatform.fsbackend.service;
 
 import java.util.List;
+import javax.validation.Valid;
+import javax.persistence.EntityNotFoundException;
 
 import org.sailplatform.fsbackend.model.Person;
 import org.sailplatform.fsbackend.repository.PersonRepository;
@@ -13,13 +15,17 @@ public class PersonService {
     @Autowired
     PersonRepository personRepository;
     
-    public Person add(Person toAdd){
-        
+    public Person add(@Valid Person toAdd){
         return personRepository.save(toAdd);
     }
 
     public List<Person> getAll(){
         return personRepository.findAll();
+    }
+
+    public Person getPersonById(Long id) {
+        return personRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Person with id " + id + " not found"));
     }
 
     public List<Person> search(String firstName) {
@@ -32,13 +38,10 @@ public class PersonService {
     }
 
     public Person update(Person toUpdate, Long id) {
-        return personRepository.findById(id)
-        .map(person -> {
-            person.setFirstName(toUpdate.getFirstName());
-            person.setLastName(toUpdate.getLastName());
-            return personRepository.save(person);
-        }).orElseGet(() -> {
-            return personRepository.save(toUpdate);
-        });
+        Person existingPerson = personRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Person with id " + id + " not found"));
+        existingPerson.setFirstName(toUpdate.getFirstName());
+        existingPerson.setLastName(toUpdate.getLastName());
+        return personRepository.save(existingPerson);
     }
 }

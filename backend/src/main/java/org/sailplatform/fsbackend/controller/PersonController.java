@@ -26,9 +26,14 @@ public class PersonController {
 		return personService.getAll();
 	}
 
-	@GetMapping("/search")
+    @GetMapping("/search")
     public List<Person> search(@RequestParam String firstName) {
         return personService.search(firstName);
+    }
+
+    @GetMapping("/{id}")
+    public Person getPersonById(@PathVariable Long id) {
+        return personService.getPersonById(id);
     }
 
     @PostMapping("/add")
